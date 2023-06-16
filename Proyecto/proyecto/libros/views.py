@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import Libros
+from .forms import LibroForm
 
 def index(request):
 
@@ -11,15 +12,18 @@ def index(request):
 class Inicio(View):
     template_name = 'inicio.html'
 
-    def post():
+    def post(self, request):
+        form = LibroForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inicio')
 
-        return
+        return render(request, self.template_name, {'form': form})
 
     def get(self, request):
-        # Esta es mi clase GET #
-        print('ya inició mi GET-----*')
-
-        return render(request, self.template_name)
+        form = LibroForm()
+        libros = Libros.objects.all()
+        return render(request, self.template_name, {'form': form, 'libros': libros})
 
 def insertar_libro(request):
     nuevo_libro = Libros(
