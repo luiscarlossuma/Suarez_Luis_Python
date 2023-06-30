@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 {% load bootstrap4 %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
@@ -19,11 +21,10 @@
   </head>
   <body>
     <!-- encabezado -->
-    <div class="titulo" align="center">
-      <h1>Libros</h1>
+    <!--<div class="titulo" align="center">
+      <h1>Libros</h1>-->
     </div>
     <!-- contenido -->
-    {% block content %}
     <div align="center">
       <div style="width: 70%;">
         <table class="table">
@@ -69,40 +70,19 @@
               <td>
                 {{ libro.paginas }}
               </td>
+              <td>
+                <form method="post" class="form-eliminar">
+                  {% csrf_token %}
+                  <input type="hidden" name="libro_id" value="{{ libro.pk }}">
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+              </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
-        <!--formulario-->
-        <br>
-        <br>
-        <form method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="{{ form.titulo.id_for_label }}">Titulo</label>
-            {{ form.titulo|add_class:"form-control" }}
-          </div>
-          <div class="form-group">
-            <label for="{{ form.edicion.id_for_label }}">Edicion</label>
-            {{ form.edicion|add_class:"form-control" }}
-          </div>
-          <div class="form-group">
-            <label for="{{ form.editorial.id_for_label }}">Editorial</label>
-            {{ form.editorial|add_class:"form-control" }}
-          </div>
-          <div class="form-group">
-            <label for="{{ form.año_pub.id_for_label }}">Año de publicacion</label>
-            {{ form.año_pub|add_class:"form-control" }}
-          </div>
-          <div class="form-group">
-            <label for="{{ form.paginas.id_for_label }}">Numero de paginas</label>
-            {{ form.paginas|add_class:"form-control" }}
-          </div>
-          <button class="btn btn-primary" type="submit">Guardar</button>
-        </form>
       </div>
     </div>
-    {% endblock %}
     <!--<div>
         {% for libro in libros %}
         <p>{{ libro.titulo }}</p>
@@ -118,3 +98,4 @@
       </div>-->
   </body>
 </html>
+{% endblock %}
