@@ -17,7 +17,6 @@ class Inicio(View):
         return render(request, self.template_name)
 
     def get(self, request):
-        form = LibroForm()
         libros = Libros.objects.all()
         return render(request, self.template_name, {'libros': libros})
 
