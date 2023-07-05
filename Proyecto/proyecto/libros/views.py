@@ -13,17 +13,13 @@ class Inicio(View):
     template_name = 'inicio.html'
 
     def post(self, request):
-        form = LibroForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
 
         return render(request, self.template_name)
 
     def get(self, request):
         form = LibroForm()
         libros = Libros.objects.all()
-        return render(request, self.template_name, {'form': form, 'libros': libros})
+        return render(request, self.template_name, {'libros': libros})
 
 class Formulario(View):
     template_name = 'formulario.html'
@@ -36,9 +32,8 @@ class Formulario(View):
         return render(request, self.template_name, {'form': form})
 
     def get(self, request):
-        libros = Libros.objects.all()
         form = LibroForm()
-        return render(request, self.template_name, {'form': form, 'libros': libros})
+        return render(request, self.template_name, {'form': form})
 
 def insertar_libro(request):
     nuevo_libro = Libros(
