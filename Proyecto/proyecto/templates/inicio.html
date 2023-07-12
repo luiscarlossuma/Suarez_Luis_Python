@@ -71,10 +71,19 @@
                 {{ libro.paginas }}
               </td>
               <td>
-                <form method="post" class="form-eliminar">
+                <form method="post" id="form-eliminar" class="form-eliminar" action="{% url 'eliminar_libro' libro.pk %}">
                   {% csrf_token %}
                   <input type="hidden" name="libro_id" value="{{ libro.pk }}">
-                  <button type="submit" class="btn btn-danger">Eliminar</button>
+                  <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+                  <div class="dropdown" id="dropdown-confirmacion" style="display: none;">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Confirmar Eliminacion
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" type="submit">Si, eliminar</button>
+                      <button class="dropdown-item" type="button" id="btn-cancelar-eliminar">Cancelar</button>
+                    </div>
+                  </div>
                 </form>
               </td>
             </tr>
