@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 
 from .models import Libros
 from .forms import LibroForm
@@ -33,6 +33,12 @@ class Formulario(View):
     def get(self, request):
         form = LibroForm()
         return render(request, self.template_name, {'form': form})
+
+class EliminarLibro(View):
+    def post(self, request, libro_id):
+        libro =get_object_or_404(Libros, pk=libro_id)
+        libro.delete()
+        return redirect('inicio')
 
 def insertar_libro(request):
     nuevo_libro = Libros(

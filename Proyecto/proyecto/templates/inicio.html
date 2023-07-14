@@ -6,6 +6,7 @@
   <head>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
       .titulo{
         background-color: #286150;
@@ -92,6 +93,19 @@
         </table>
       </div>
     </div>
+    <script>
+      $(document).ready(function(){
+        //Mostrar el menu desplegable
+        $('#btn-confirmar-eliminar').click(function(){
+          $('#dropdown-confirmacion').show();
+        });
+        //Cancelar la eliminacion
+        $('#btn-cancelar-eliminar').click(function(){
+          $('#dropdown-confirmacion').hide();
+        });
+      });
+    </script>
+
     <!--<div>
         {% for libro in libros %}
         <p>{{ libro.titulo }}</p>
