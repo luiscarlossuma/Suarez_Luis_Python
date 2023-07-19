@@ -75,8 +75,8 @@
                 <form method="post" id="form-eliminar" class="form-eliminar" action="{% url 'eliminar_libro' libro.pk %}">
                   {% csrf_token %}
                   <input type="hidden" name="libro_id" value="{{ libro.pk }}">
-                  <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
-                  <div class="dropdown" id="dropdown-confirmacion" style="display: none;">
+                  <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar-{{ libro.pk }}">Eliminar</button>
+                  <div class="dropdown" id="dropdown-confirmacion-{{ libro.pk }}" style="display: none;">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Confirmar Eliminacion
                     </button>
@@ -96,12 +96,14 @@
     <script>
       $(document).ready(function(){
         //Mostrar el menu desplegable
-        $('#btn-confirmar-eliminar').click(function(){
-          $('#dropdown-confirmacion').show();
+        $('[id^="btn-confirmar-eliminar"]').click(function(){
+          var libroId = $(this).attr('id').split('-')[3];
+          $('#dropdown-confirmacion-' + libroId).show();
         });
         //Cancelar la eliminacion
-        $('#btn-cancelar-eliminar').click(function(){
-          $('#dropdown-confirmacion').hide();
+        $('[id^="btn-cancelar-eliminar"]').click(function(){
+          var libroId = $(this).attr('id').split('-')[3];
+          $('#dropdown-confirmacion-' + libroId).hide();
         });
       });
     </script>
