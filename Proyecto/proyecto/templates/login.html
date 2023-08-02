@@ -6,6 +6,11 @@
 
 {% if messages %}
 <!--Bloque de mensajes-->
+<ul class="messages" >
+    {% for message in messages %}
+    <li {% if message.tag %} class="{{ message.tags }}" {% endif %}>{{message}}</li>
+    {% endfor %}
+</ul>
 {% endif %}
 
 <!--Formulario de Login-->
