@@ -132,3 +132,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 LOGIN_REDIRECT_URL = '/libros/inicio'
 LOGIN_URL = '/login'
+
+# Configuracion de envio de correo electronico
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.hostinger.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'password_reset@straystudios.net'
+EMAIL_HOST_PASSWORD = 'Passwordreset23*'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
